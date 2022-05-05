@@ -7,9 +7,27 @@ import MainScreen from './src/screens/MainScreen';
 import ShopScreen from './src/screens/ShopScreen';
 import CartScreen from './src/screens/CartScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
+import ShopFrontScreen from './src/screens/ShopFrontScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+function HomeFlow() {
+	return (
+		<Stack.Navigator>
+			<Stack.Screen
+				name='HomeFlow'
+				component={MainFlow}
+				options={{ headerShown: false }}
+			/>
+			<Stack.Screen
+				name='FlowerFront'
+				component={ShopFrontScreen}
+				options={{ headerShown: false }}
+			/>
+		</Stack.Navigator>
+	);
+}
 
 function MainFlow() {
 	return (
@@ -25,7 +43,7 @@ function MainFlow() {
 export default function App() {
 	return (
 		<NavigationContainer>
-			<MainFlow />
+			<HomeFlow />
 		</NavigationContainer>
 	);
 }
