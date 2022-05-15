@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 // import tw from "tailwind-react-native-classnames";
 
@@ -34,20 +36,39 @@ const ShopInfoScreen = ({ navigation }) => {
 			</View>
 			<View style={styles.shopInfoContainer}>
 				<Text style={styles.headerText}>Flower Shop #1</Text>
+
+				<View style={{ flexDirection: 'row' }}>
+					<Feather
+						name='star'
+						size={24}
+						style={{ alignSelf: 'center', marginHorizontal: 2 }}
+						color='#588961'
+					/>
+					<Text style={styles.infoText}>4.9</Text>
+				</View>
+				<View style={{ flexDirection: 'row' }}>
+					<Ionicons
+						name='timer'
+						size={24}
+						color='#588961'
+						style={{ marginHorizontal: 2 }}
+					/>
+					<Text style={styles.infoText}>5-15min</Text>
+				</View>
+				<View style={{ flexDirection: 'row' }}>
+					<FontAwesome5
+						name='money-bill'
+						size={19}
+						color='#588961'
+						style={{ marginHorizontal: 2 }}
+					/>
+					<Text style={styles.infoText}>5.00€</Text>
+				</View>
 				<Text style={styles.descriptionText}>
 					description description description description description
 					description description description description description
 					description description description description description
 				</Text>
-				<View style={{ flexDirection: 'row' }}>
-					<Feather
-						name='star'
-						size={20}
-						style={{ alignSelf: 'center', marginHorizontal: 2 }}
-						color='#588961'
-					/>
-					<Text>review</Text>
-				</View>
 			</View>
 		</View>
 	);
@@ -66,6 +87,7 @@ const styles = StyleSheet.create({
 	},
 	shopInfoContainer: {
 		marginHorizontal: 10,
+		marginVertical: 5,
 	},
 	headerText: {
 		fontSize: 35,
@@ -74,6 +96,13 @@ const styles = StyleSheet.create({
 	},
 	descriptionText: {
 		color: '#588961',
+		borderColor: '#005500',
+		borderTopWidth: 1,
+		borderBottomWidth: 1,
+		marginVertical: 5,
+	},
+	infoText: {
+		alignSelf: 'center',
 	},
 });
 
