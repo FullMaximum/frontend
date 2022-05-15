@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Text, SafeAreaView, ScrollView } from 'react-native';
 import ShopCard from '../components/ShopCard';
 
-const MainScreen = () => {
+const MainScreen = ({ navigation }) => {
 	return (
 		<SafeAreaView>
 			<View style={styles.themeContainer}>
@@ -12,10 +12,10 @@ const MainScreen = () => {
 					style={styles.themeScroll}
 					showsHorizontalScrollIndicator={false}
 				>
-					<ShopCard />
-					<ShopCard />
-					<ShopCard />
-					<ShopCard />
+					<ShopCard navigation={navigation} />
+					<ShopCard navigation={navigation} />
+					<ShopCard navigation={navigation} />
+					<ShopCard navigation={navigation} />
 				</ScrollView>
 			</View>
 		</SafeAreaView>
