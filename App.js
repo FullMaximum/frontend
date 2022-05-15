@@ -7,7 +7,7 @@ import MainScreen from './src/screens/MainScreen';
 import ShopScreen from './src/screens/ShopScreen';
 import CartScreen from './src/screens/CartScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
-import ShopFrontScreen from './src/screens/ShopFrontScreen';
+import ShopInfoScreen from './src/screens/ShopInfoScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -20,7 +20,7 @@ function HomeFlow() {
 				component={MainFlow}
 				options={{ headerShown: false }}
 			/>
-			<Stack.Screen name='ShopFront' component={ShopFrontScreen} />
+			<Stack.Screen name='ShopInfo' component={ShopInfoScreen} />
 		</Stack.Navigator>
 	);
 }

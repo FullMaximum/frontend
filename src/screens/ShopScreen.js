@@ -2,13 +2,17 @@ import React, {useState, useEffect } from 'react';
 import {View, StyleSheet, Text, 
 	ScrollView, SafeAreaView, TouchableOpacity,
 	StatusBar, Image, ActivityIndicator} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+	
 
 import SearchBar from "./SearchBar";
 import List from "./List";
+import ShopInfo from "./ShopInfoScreen";
 
 
-
-const ShopScreen = () => {
+const ShopScreen = ({ navigation }) => {
 	// callFun = () =>
 	// {
 
@@ -46,7 +50,7 @@ const ShopScreen = () => {
             		setClicked={setClicked}
           		/> */}
 			<ScrollView style={styles.scrollView}>
-				<TouchableOpacity activeOpacity = { .5 } onPress={ callFun }>
+				<TouchableOpacity activeOpacity = { .5 } onPress={() => navigation.push('ShopInfo') }>
 					<Image source={require('../../pics/Flowers-shop.png')} style={styles.picStyle} />
 				</TouchableOpacity>
 				<View style={styles.view}>
