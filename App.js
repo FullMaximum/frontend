@@ -20,7 +20,11 @@ function HomeFlow() {
 				component={MainFlow}
 				options={{ headerShown: false }}
 			/>
-			<Stack.Screen name='ShopInfo' component={ShopInfoScreen} />
+			<Stack.Screen
+				name='ShopInfo'
+				component={ShopInfoScreen}
+				options={{ headerShown: false }}
+			/>
 		</Stack.Navigator>
 	);
 }

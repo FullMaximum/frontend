@@ -24,8 +24,6 @@ const MainScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	themeContainer: {
-		borderColor: 'red',
-		borderWidth: 1,
 		marginTop: 50,
 	},
 	themeHeader: {
