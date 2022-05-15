@@ -3,7 +3,7 @@ import {
 	View,
 	StyleSheet,
 	Text,
-	FlatList,
+	ScrollView,
 	Image,
 	TouchableOpacity,
 } from 'react-native';
@@ -11,6 +11,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
+import FlowerCard from '../components/FlowerCard';
 
 // import tw from "tailwind-react-native-classnames";
 
@@ -18,7 +19,7 @@ import { myShops } from '../../components/ShopList';
 
 const ShopInfoScreen = ({ navigation }) => {
 	return (
-		<View>
+		<ScrollView>
 			<View style={styles.shopImageContainer}>
 				<Image
 					style={styles.shopImage}
@@ -70,7 +71,12 @@ const ShopInfoScreen = ({ navigation }) => {
 					description description description description description
 				</Text>
 			</View>
-		</View>
+
+			<FlowerCard />
+			<FlowerCard />
+			<FlowerCard />
+			<FlowerCard />
+		</ScrollView>
 	);
 };
 
@@ -91,7 +97,7 @@ const styles = StyleSheet.create({
 	},
 	headerText: {
 		fontSize: 35,
-		color: '#588961',
+		color: 'green',
 		fontWeight: 'bold',
 	},
 	descriptionText: {
