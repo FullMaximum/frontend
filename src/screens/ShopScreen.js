@@ -1,15 +1,24 @@
 import React, {useState, useEffect } from 'react';
 import {View, StyleSheet, Text, 
-	ScrollView, SafeAreaView, 
+	ScrollView, SafeAreaView, TouchableOpacity,
 	StatusBar, Image, ActivityIndicator} from 'react-native';
 
 import SearchBar from "./SearchBar";
 import List from "./List";
 
+
+
 const ShopScreen = () => {
+	// callFun = () =>
+	// {
+
+	// alert("Image Clicked!!!");
+
+	// }
 	const [searchPhrase, setSearchPhrase] = useState("");
 	const [clicked, setClicked] = useState(false);
 	const [fakeData, setFakeData] = useState();
+
 	useEffect(() => {
 		const getData = async () => {
 		  const apiResponse = await fetch(
@@ -20,6 +29,8 @@ const ShopScreen = () => {
 		};
 		getData();
 	  }, []);
+
+
 	return (
 		<SafeAreaView style={styles.container}>
 			{!clicked && <Text style={styles.title}></Text>}
@@ -35,7 +46,9 @@ const ShopScreen = () => {
             		setClicked={setClicked}
           		/> */}
 			<ScrollView style={styles.scrollView}>
-				<Image source={require('../../pics/Flowers-shop.png')} style={styles.picStyle} />
+				<TouchableOpacity activeOpacity = { .5 } onPress={ callFun }>
+					<Image source={require('../../pics/Flowers-shop.png')} style={styles.picStyle} />
+				</TouchableOpacity>
 				<View style={styles.view}>
 				<Text style={styles.text}>Flower-shop-1</Text>
 					<Text>
@@ -70,7 +83,12 @@ const ShopScreen = () => {
 		</SafeAreaView>
 	);
 };
+const callFun = () =>
+{
 
+alert("Image Clicked!!!");
+
+}
 // const styles = StyleSheet.create();
 
 const styles = StyleSheet.create({
