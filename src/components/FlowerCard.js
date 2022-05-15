@@ -1,5 +1,14 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
+import {
+	View,
+	StyleSheet,
+	Text,
+	Image,
+	TouchableOpacity,
+	ScrollView,
+	TextInput,
+} from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 
 const FlowerCard = () => {
 	return (
@@ -15,11 +24,30 @@ const FlowerCard = () => {
 			</View>
 			<View style={styles.infoContainer}>
 				<Text style={styles.flowerHeader}>Tulips</Text>
-				<Text style={styles.flowerDescription}>
+				<Text style={styles.flowerDescription} numberOfLines={3}>
 					Tulips are the best flowers ever because they are the only
 					flowers I have added to the frontend thank you for listening
 					to my ted talk
 				</Text>
+				<View style={styles.counterContainer}>
+					<TouchableOpacity style={styles.counterButton}>
+						<AntDesign name='leftcircle' size={30} color='red' />
+					</TouchableOpacity>
+					<TextInput
+						style={{
+							alignSelf: 'center',
+							fontSize: 20,
+							width: 40,
+							textAlign: 'center',
+						}}
+						keyboardType='numeric'
+					>
+						0
+					</TextInput>
+					<TouchableOpacity style={styles.counterButton}>
+						<AntDesign name='rightcircle' size={30} color='green' />
+					</TouchableOpacity>
+				</View>
 			</View>
 		</View>
 	);
@@ -56,6 +84,15 @@ const styles = StyleSheet.create({
 	},
 	flowerDescription: {
 		color: '#588961',
+		height: 60,
+	},
+	counterContainer: {
+		flexDirection: 'row',
+		justifyContent: 'center',
+		marginVertical: 2,
+	},
+	counterButton: {
+		marginHorizontal: 10,
 	},
 });
 

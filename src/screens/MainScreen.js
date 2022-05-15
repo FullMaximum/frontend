@@ -6,7 +6,35 @@ const MainScreen = ({ navigation }) => {
 	return (
 		<SafeAreaView>
 			<View style={styles.themeContainer}>
-				<Text style={styles.themeHeader}>Popular</Text>
+				<Text style={styles.themeHeader}>Popular 🤩</Text>
+				<ScrollView
+					horizontal
+					style={styles.themeScroll}
+					showsHorizontalScrollIndicator={false}
+				>
+					<ShopCard navigation={navigation} />
+					<ShopCard navigation={navigation} />
+					<ShopCard navigation={navigation} />
+					<ShopCard navigation={navigation} />
+				</ScrollView>
+			</View>
+
+			<View>
+				<Text style={styles.themeHeader}>New 🤫</Text>
+				<ScrollView
+					horizontal
+					style={styles.themeScroll}
+					showsHorizontalScrollIndicator={false}
+				>
+					<ShopCard navigation={navigation} />
+					<ShopCard navigation={navigation} />
+					<ShopCard navigation={navigation} />
+					<ShopCard navigation={navigation} />
+				</ScrollView>
+			</View>
+
+			<View>
+				<Text style={styles.themeHeader}>Trending Now 🚀</Text>
 				<ScrollView
 					horizontal
 					style={styles.themeScroll}

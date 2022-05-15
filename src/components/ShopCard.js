@@ -35,10 +35,6 @@ const styles = StyleSheet.create({
 		width: 180,
 		marginHorizontal: 5,
 		borderRadius: 10,
-		borderColor: 'green',
-		borderLeftWidth: 1,
-		borderRightWidth: 1,
-		borderBottomWidth: 1,
 	},
 	image: {
 		width: 178,
@@ -49,11 +45,12 @@ const styles = StyleSheet.create({
 	headerText: {
 		marginHorizontal: 10,
 		fontSize: 18,
-		alignSelf: 'center',
+		fontWeight: 'bold',
 	},
 	additionalInfoContainer: {
 		flexDirection: 'row',
 		marginHorizontal: 10,
+		marginTop: -5,
 	},
 	deliveryPriceText: {
 		fontSize: 16,
