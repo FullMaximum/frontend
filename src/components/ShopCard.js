@@ -1,35 +1,29 @@
 import React from 'react';
-import {
-	View,
-	StyleSheet,
-	Text,
-	ScrollView,
-	Image,
-	TouchableOpacity,
-} from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
+import { View, Image, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { Feather } from '@expo/vector-icons';
 
 const ShopCard = ({ navigation }) => {
 	return (
 		<TouchableOpacity
 			style={styles.container}
-			onPress={() => navigation.navigate('FlowerFront')}
+			onPress={() => navigation.push('ShopInfo')}
 		>
-			<Image style={styles.image} />
-			<View style={styles.infoContainer}>
-				<Text style={styles.headerText}>Flower Shop #1</Text>
-				<View style={{ flexDirection: 'row', paddingHorizontal: 10 }}>
-					<Text style={styles.priceText}>2.50€</Text>
-					<View style={styles.ratingContainer}>
-						<FontAwesome
-							name='star'
-							size={14}
-							color='black'
-							style={{ alignSelf: 'center', padding: 2 }}
-						/>
-						<Text>4.9</Text>
-					</View>
-				</View>
+			<Image
+				style={styles.image}
+				source={{
+					uri: 'https://www.phillips-flowers.com/images/hinsdale-store.jpg',
+				}}
+			/>
+			<Text style={styles.headerText}>Flower Shop #1</Text>
+			<View style={styles.additionalInfoContainer}>
+				<Text style={styles.deliveryPriceText}>5€</Text>
+				<Feather
+					name='star'
+					size={20}
+					style={{ alignSelf: 'center', marginHorizontal: 2 }}
+					color='black'
+				/>
+				<Text style={styles.shopRatingText}>4.9</Text>
 			</View>
 		</TouchableOpacity>
 	);
@@ -37,32 +31,33 @@ const ShopCard = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	container: {
-		height: 120,
-		width: 160,
-		backgroundColor: '#AAFF00',
+		height: 130,
+		width: 180,
+		marginHorizontal: 5,
 		borderRadius: 10,
-		marginHorizontal: 10,
 	},
 	image: {
-		height: 70,
-		backgroundColor: 'yellow',
+		width: 178,
+		height: 80,
 		borderTopLeftRadius: 10,
 		borderTopRightRadius: 10,
 	},
-	infoContainer: {
-		padding: 5,
-	},
 	headerText: {
-		alignSelf: 'center',
-		color: 'green',
+		marginHorizontal: 10,
+		fontSize: 18,
 		fontWeight: 'bold',
-		fontSize: 16,
 	},
-	priceText: { fontWeight: 'bold' },
-	ratingContainer: {
+	additionalInfoContainer: {
 		flexDirection: 'row',
+		marginHorizontal: 10,
+		marginTop: -5,
+	},
+	deliveryPriceText: {
+		fontSize: 16,
 		flex: 1,
-		justifyContent: 'flex-end',
+	},
+	shopRatingText: {
+		fontSize: 16,
 	},
 });
 

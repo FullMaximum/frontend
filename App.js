@@ -7,7 +7,7 @@ import MainScreen from './src/screens/MainScreen';
 import ShopScreen from './src/screens/ShopScreen';
 import CartScreen from './src/screens/CartScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
-import ShopFrontScreen from './src/screens/ShopFrontScreen';
+import ShopInfoScreen from './src/screens/ShopInfoScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -16,13 +16,13 @@ function HomeFlow() {
 	return (
 		<Stack.Navigator>
 			<Stack.Screen
-				name='HomeFlow'
+				name='MainFlow'
 				component={MainFlow}
 				options={{ headerShown: false }}
 			/>
 			<Stack.Screen
-				name='FlowerFront'
-				component={ShopFrontScreen}
+				name='ShopInfo'
+				component={ShopInfoScreen}
 				options={{ headerShown: false }}
 			/>
 		</Stack.Navigator>
@@ -32,7 +32,11 @@ function HomeFlow() {
 function MainFlow() {
 	return (
 		<Tab.Navigator>
-			<Tab.Screen name='Home' component={MainScreen} />
+			<Tab.Screen
+				name='Home'
+				component={MainScreen}
+				options={{ headerShown: false }}
+			/>
 			<Tab.Screen name='Shop' component={ShopScreen} />
 			<Tab.Screen name='Cart' component={CartScreen} />
 			<Tab.Screen name='About Me' component={ProfileScreen} />
@@ -49,10 +53,10 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+	container: {
+		flex: 1,
+		backgroundColor: '#fff',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
 });
