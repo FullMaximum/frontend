@@ -1,8 +1,17 @@
 import React from 'react';
 import { View, StyleSheet, Text, SafeAreaView, ScrollView } from 'react-native';
 import ShopCard from '../components/ShopCard';
+import shopsApi from '../api/shops';
 
 const MainScreen = ({ navigation }) => {
+	const getResponse = async () => {
+		let response = await shopsApi.get('/getAll');
+
+		console.log(response.data);
+	};
+
+	getResponse();
+
 	return (
 		<SafeAreaView>
 			<View style={styles.themeContainer}>
