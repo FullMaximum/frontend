@@ -24,7 +24,7 @@ const MainScreen = ({ navigation }) => {
 				<Text style={styles.themeHeader}>Popular 🤩</Text>
 				{state.returnObject ? (
 					<FlatList
-						data={state.returnObject}
+						data={state.returnObject.filter(x => x.rating > 4).sort((a,b) => b.rating - a.rating)}
 						keyExtractor={(item) => item.id}
 						renderItem={({ item }) => {
 							return (
@@ -42,7 +42,7 @@ const MainScreen = ({ navigation }) => {
 				<Text style={styles.themeHeader}>New 🤫</Text>
 				{state.returnObject ? (
 					<FlatList
-						data={state.returnObject}
+						data={state.returnObject.sort((a,b) =>  new Date(b.createdAt) - new Date(a.createdAt))}
 						keyExtractor={(item) => item.id}
 						renderItem={({ item }) => {
 							return (
@@ -73,9 +73,28 @@ const MainScreen = ({ navigation }) => {
 					/>
 				) : null}
 			</View>
+			<View>
+				<Text style={styles.themeHeader}>All shops</Text>
+				{state.returnObject ? (
+					<FlatList
+						data={state.returnObject}
+						keyExtractor={(item) => item.id}
+						renderItem={({ item }) => {
+							return (
+								<ShopCard navigation={navigation} data={item} />
+							);
+						}}
+						horizontal
+						style={styles.themeScroll}
+						showsHorizontalScrollIndicator={false}
+					/>
+				) : null}
+			</View>
 		</SafeAreaView>
 	);
 };
+
+
 
 const styles = StyleSheet.create({
 	themeContainer: {
