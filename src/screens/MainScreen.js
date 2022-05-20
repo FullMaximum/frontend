@@ -1,59 +1,77 @@
-import React from 'react';
-import { View, StyleSheet, Text, SafeAreaView, ScrollView } from 'react-native';
+import React, { useContext, useEffect } from 'react';
+import {
+	View,
+	StyleSheet,
+	Text,
+	SafeAreaView,
+	ScrollView,
+	FlatList,
+} from 'react-native';
 import ShopCard from '../components/ShopCard';
 import shopsApi from '../api/shops';
+import { Context as ShopContext } from '../context/ShopContext';
 
 const MainScreen = ({ navigation }) => {
-	const getResponse = async () => {
-		let response = await shopsApi.get('/getAll');
+	const { state, fetchShops } = useContext(ShopContext);
 
-		console.log(response.data);
-	};
-
-	getResponse();
+	useEffect(async () => {
+		fetchShops();
+	}, []);
 
 	return (
 		<SafeAreaView>
 			<View style={styles.themeContainer}>
 				<Text style={styles.themeHeader}>Popular 🤩</Text>
-				<ScrollView
-					horizontal
-					style={styles.themeScroll}
-					showsHorizontalScrollIndicator={false}
-				>
-					<ShopCard navigation={navigation} />
-					<ShopCard navigation={navigation} />
-					<ShopCard navigation={navigation} />
-					<ShopCard navigation={navigation} />
-				</ScrollView>
+				{state.returnObject ? (
+					<FlatList
+						data={state.returnObject}
+						keyExtractor={(item) => item.id}
+						renderItem={({ item }) => {
+							return (
+								<ShopCard navigation={navigation} data={item} />
+							);
+						}}
+						horizontal
+						style={styles.themeScroll}
+						showsHorizontalScrollIndicator={false}
+					/>
+				) : null}
 			</View>
 
 			<View>
 				<Text style={styles.themeHeader}>New 🤫</Text>
-				<ScrollView
-					horizontal
-					style={styles.themeScroll}
-					showsHorizontalScrollIndicator={false}
-				>
-					<ShopCard navigation={navigation} />
-					<ShopCard navigation={navigation} />
-					<ShopCard navigation={navigation} />
-					<ShopCard navigation={navigation} />
-				</ScrollView>
+				{state.returnObject ? (
+					<FlatList
+						data={state.returnObject}
+						keyExtractor={(item) => item.id}
+						renderItem={({ item }) => {
+							return (
+								<ShopCard navigation={navigation} data={item} />
+							);
+						}}
+						horizontal
+						style={styles.themeScroll}
+						showsHorizontalScrollIndicator={false}
+					/>
+				) : null}
 			</View>
 
 			<View>
 				<Text style={styles.themeHeader}>Trending Now 🚀</Text>
-				<ScrollView
-					horizontal
-					style={styles.themeScroll}
-					showsHorizontalScrollIndicator={false}
-				>
-					<ShopCard navigation={navigation} />
-					<ShopCard navigation={navigation} />
-					<ShopCard navigation={navigation} />
-					<ShopCard navigation={navigation} />
-				</ScrollView>
+				{state.returnObject ? (
+					<FlatList
+						data={state.returnObject}
+						keyExtractor={(item) => item.id}
+						renderItem={({ item }) => {
+							return (
+								<ShopCard navigation={navigation} data={item} />
+							);
+						}}
+						horizontal
+						style={styles.themeScroll}
+						showsHorizontalScrollIndicator={false}
+					/>
+				) : null}
 			</View>
 		</SafeAreaView>
 	);

@@ -8,6 +8,7 @@ import ShopScreen from './src/screens/ShopScreen';
 import CartScreen from './src/screens/CartScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import ShopInfoScreen from './src/screens/ShopInfoScreen';
+import { Provider as ShopProvider } from './src/context/ShopContext';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -46,9 +47,11 @@ function MainFlow() {
 
 export default function App() {
 	return (
-		<NavigationContainer>
-			<HomeFlow />
-		</NavigationContainer>
+		<ShopProvider>
+			<NavigationContainer>
+				<HomeFlow />
+			</NavigationContainer>
+		</ShopProvider>
 	);
 }
 

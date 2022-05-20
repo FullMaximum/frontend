@@ -2,11 +2,11 @@ import React from 'react';
 import { View, Image, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-const ShopCard = ({ navigation }) => {
+const ShopCard = ({ navigation, data }) => {
 	return (
 		<TouchableOpacity
 			style={styles.container}
-			onPress={() => navigation.push('ShopInfo')}
+			onPress={() => navigation.push('ShopInfo', { data })}
 		>
 			<Image
 				style={styles.image}
@@ -14,16 +14,18 @@ const ShopCard = ({ navigation }) => {
 					uri: 'https://www.phillips-flowers.com/images/hinsdale-store.jpg',
 				}}
 			/>
-			<Text style={styles.headerText}>Flower Shop #1</Text>
+			<Text style={styles.headerText}>{data.name}</Text>
 			<View style={styles.additionalInfoContainer}>
-				<Text style={styles.deliveryPriceText}>5€</Text>
+				<Text style={styles.deliveryPriceText}>
+					{data.deliveryPrice}€
+				</Text>
 				<Feather
 					name='star'
 					size={20}
 					style={{ alignSelf: 'center', marginHorizontal: 2 }}
 					color='black'
 				/>
-				<Text style={styles.shopRatingText}>4.9</Text>
+				<Text style={styles.shopRatingText}>{data.rating}</Text>
 			</View>
 		</TouchableOpacity>
 	);
