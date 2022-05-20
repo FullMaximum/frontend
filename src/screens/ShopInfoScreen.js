@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
 	View,
 	StyleSheet,
@@ -13,6 +13,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import FlowerCard from '../components/FlowerCard';
 import flowersApi from '../api/flowers';
+import { Context as CartContext } from '../context/CartContext';
 
 // import tw from "tailwind-react-native-classnames";
 
@@ -21,12 +22,39 @@ import { myShops } from '../../components/ShopList';
 const ShopInfoScreen = ({ navigation, route }) => {
 	const { data } = route.params;
 	const [flowers, setFlowers] = useState(null);
+	const { state, setShop, changeFlower } = useContext(CartContext);
 
 	useEffect(async () => {
 		let response = await flowersApi.get('/getallflowers');
 
 		setFlowers(response.data.success ? response.data.returnObject : null);
 	}, [data]);
+
+	const ChangeFlowerAmount = (id, amount) => {
+		CheckCartShop();
+		changeFlower({ flower: { id, amount } });
+	};
+
+	const CheckCartShop = () => {
+		state
+			? state.shopId == data.id
+				? null
+				: setShop({ shopId: data.id, flowers })
+			: null;
+	};
+
+	const getInitialAmount = (id) => {
+		if (state.shopId !== data.id) return 0;
+
+		if (state || state.flowers) {
+			let initAmount = state.flowers
+				? state.flowers.find((el) => el.id === id).amount
+				: 0;
+			return initAmount ? initAmount : 0;
+		} else {
+			return 0;
+		}
+	};
 
 	return (
 		<ScrollView>
@@ -80,7 +108,14 @@ const ShopInfoScreen = ({ navigation, route }) => {
 
 			{flowers
 				? flowers.map((item) => (
-						<FlowerCard key={item.id} data={item} />
+						<FlowerCard
+							key={item.id}
+							data={item}
+							onChange={(id, amount) =>
+								ChangeFlowerAmount(id, amount)
+							}
+							initialAmount={() => getInitialAmount(item.id)}
+						/>
 				  ))
 				: null}
 		</ScrollView>

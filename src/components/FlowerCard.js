@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	View,
 	StyleSheet,
@@ -9,8 +9,13 @@ import {
 	TextInput,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import useDidUpdateEffect from '../hooks/useDidUpdateEffect';
 
-const FlowerCard = ({ data }) => {
+const FlowerCard = ({ data, onChange, initialAmount = 0 }) => {
+	const [amount, setAmount] = useState(initialAmount);
+
+	useDidUpdateEffect(() => onChange(data.id, amount), [amount]);
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.imageContainer}>
@@ -28,7 +33,14 @@ const FlowerCard = ({ data }) => {
 					{data.category}
 				</Text>
 				<View style={styles.counterContainer}>
-					<TouchableOpacity style={styles.counterButton}>
+					<TouchableOpacity
+						style={styles.counterButton}
+						onPress={() => {
+							if (amount <= 0) return;
+
+							setAmount(amount - 1);
+						}}
+					>
 						<AntDesign name='leftcircle' size={30} color='red' />
 					</TouchableOpacity>
 					<TextInput
@@ -39,10 +51,16 @@ const FlowerCard = ({ data }) => {
 							textAlign: 'center',
 						}}
 						keyboardType='numeric'
+						maxLength={3}
 					>
-						0
+						{amount}
 					</TextInput>
-					<TouchableOpacity style={styles.counterButton}>
+					<TouchableOpacity
+						style={styles.counterButton}
+						onPress={() => {
+							setAmount(amount + 1);
+						}}
+					>
 						<AntDesign name='rightcircle' size={30} color='green' />
 					</TouchableOpacity>
 				</View>
