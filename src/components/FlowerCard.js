@@ -10,24 +10,22 @@ import {
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
-const FlowerCard = () => {
+const FlowerCard = ({ data }) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.imageContainer}>
 				<Image
 					source={{
-						uri: 'https://www.edenbrothers.com/store/media/Bulbs-Flowers/resized/Tulip-Darwin-Hybrid-Mix_medium.jpg',
+						uri: data.imagePath,
 					}}
 					style={styles.image}
 				/>
-				<Text style={styles.priceText}>5.00€ / vnt.</Text>
+				<Text style={styles.priceText}>{data.price}€ / vnt.</Text>
 			</View>
 			<View style={styles.infoContainer}>
-				<Text style={styles.flowerHeader}>Tulips</Text>
+				<Text style={styles.flowerHeader}>{data.name}</Text>
 				<Text style={styles.flowerDescription} numberOfLines={3}>
-					Tulips are the best flowers ever because they are the only
-					flowers I have added to the frontend thank you for listening
-					to my ted talk
+					{data.category}
 				</Text>
 				<View style={styles.counterContainer}>
 					<TouchableOpacity style={styles.counterButton}>

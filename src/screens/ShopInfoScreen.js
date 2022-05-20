@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	View,
 	StyleSheet,
@@ -12,12 +12,22 @@ import { Feather } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import FlowerCard from '../components/FlowerCard';
+import flowersApi from '../api/flowers';
 
 // import tw from "tailwind-react-native-classnames";
 
 import { myShops } from '../../components/ShopList';
 
-const ShopInfoScreen = ({ navigation }) => {
+const ShopInfoScreen = ({ navigation, route }) => {
+	const { data } = route.params;
+	const [flowers, setFlowers] = useState(null);
+
+	useEffect(async () => {
+		let response = await flowersApi.get('/getallflowers');
+
+		setFlowers(response.data.success ? response.data.returnObject : null);
+	}, [data]);
+
 	return (
 		<ScrollView>
 			<View style={styles.shopImageContainer}>
@@ -36,7 +46,7 @@ const ShopInfoScreen = ({ navigation }) => {
 				</TouchableOpacity>
 			</View>
 			<View style={styles.shopInfoContainer}>
-				<Text style={styles.headerText}>Flower Shop #1</Text>
+				<Text style={styles.headerText}>{data.name}</Text>
 
 				<View style={{ flexDirection: 'row' }}>
 					<Feather
@@ -45,7 +55,7 @@ const ShopInfoScreen = ({ navigation }) => {
 						style={{ alignSelf: 'center', marginHorizontal: 2 }}
 						color='#588961'
 					/>
-					<Text style={styles.infoText}>4.9</Text>
+					<Text style={styles.infoText}>{data.rating}</Text>
 				</View>
 				<View style={{ flexDirection: 'row' }}>
 					<Ionicons
@@ -54,7 +64,7 @@ const ShopInfoScreen = ({ navigation }) => {
 						color='#588961'
 						style={{ marginHorizontal: 2 }}
 					/>
-					<Text style={styles.infoText}>5-15min</Text>
+					<Text style={styles.infoText}>{data.deliveryDistance}</Text>
 				</View>
 				<View style={{ flexDirection: 'row' }}>
 					<FontAwesome5
@@ -63,19 +73,16 @@ const ShopInfoScreen = ({ navigation }) => {
 						color='#588961'
 						style={{ marginHorizontal: 2 }}
 					/>
-					<Text style={styles.infoText}>5.00€</Text>
+					<Text style={styles.infoText}>{data.deliveryPrice}€</Text>
 				</View>
-				<Text style={styles.descriptionText}>
-					description description description description description
-					description description description description description
-					description description description description description
-				</Text>
+				<Text style={styles.descriptionText}>{data.description}</Text>
 			</View>
 
-			<FlowerCard />
-			<FlowerCard />
-			<FlowerCard />
-			<FlowerCard />
+			{flowers
+				? flowers.map((item) => (
+						<FlowerCard key={item.id} data={item} />
+				  ))
+				: null}
 		</ScrollView>
 	);
 };
