@@ -3,19 +3,21 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { EvilIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
-const CartFlowerCard = () => {
+const CartFlowerCard = ({ data }) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.infoContainer}>
 				<View style={{ flexDirection: 'row', alignItems: 'center' }}>
-					<Text style={styles.headerText}>Tulips</Text>
-					<Text style={styles.fullPriceText}>300.23€</Text>
+					<Text style={styles.headerText}>{data.name}</Text>
+					<Text style={styles.fullPriceText}>
+						{data.price * data.amount}€
+					</Text>
 				</View>
 				<View style={styles.amountContainer}>
 					<TouchableOpacity style={styles.editAmountButton}>
 						<AntDesign name='minus' size={35} color='red' />
 					</TouchableOpacity>
-					<Text style={styles.flowerAmountText}>500</Text>
+					<Text style={styles.flowerAmountText}>{data.amount}</Text>
 					<TouchableOpacity style={styles.editAmountButton}>
 						<AntDesign name='plus' size={35} color='green' />
 					</TouchableOpacity>
@@ -24,7 +26,7 @@ const CartFlowerCard = () => {
 			<Image
 				style={styles.image}
 				source={{
-					uri: 'https://www.gardendesign.com/pictures/images/263x300Exact_62x0/site_3/helianthus-yellow-flower-pixabay_11863.jpg',
+					uri: data.imagePath,
 				}}
 			/>
 			<TouchableOpacity style={styles.deleteButton}>
@@ -50,7 +52,7 @@ const styles = StyleSheet.create({
 	image: {
 		height: 80,
 		width: 100,
-		backgroundColor: 'red',
+		backgroundColor: 'white',
 	},
 	infoContainer: {
 		flex: 1,
@@ -83,10 +85,9 @@ const styles = StyleSheet.create({
 	},
 	fullPriceText: {
 		fontSize: 18,
-		marginHorizontal: 5,
-		width: 80,
+		marginHorizontal: 10,
 	},
-	flowerAmountText: { fontSize: 20 },
+	flowerAmountText: { fontSize: 20, marginHorizontal: 10 },
 	editAmountButton: {
 		borderColor: 'black',
 		borderWidth: 0.1,
