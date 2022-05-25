@@ -12,8 +12,12 @@ const CartFlowerCard = () => {
 					<Text style={styles.fullPriceText}>300.23€</Text>
 				</View>
 				<View style={styles.amountContainer}>
-					<TouchableOpacity>
-						<AntDesign name='minus' size={30} color='red' />
+					<TouchableOpacity style={styles.editAmountButton}>
+						<AntDesign name='minus' size={35} color='red' />
+					</TouchableOpacity>
+					<Text style={styles.flowerAmountText}>500</Text>
+					<TouchableOpacity style={styles.editAmountButton}>
+						<AntDesign name='plus' size={35} color='green' />
 					</TouchableOpacity>
 				</View>
 			</View>
@@ -37,11 +41,11 @@ const CartFlowerCard = () => {
 
 const styles = StyleSheet.create({
 	container: {
-		borderWidth: 1,
 		flexDirection: 'row',
 		marginHorizontal: 5,
 		borderRadius: 12,
 		backgroundColor: '#E9F4EE',
+		marginVertical: 10,
 	},
 	image: {
 		height: 80,
@@ -56,6 +60,7 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		fontWeight: 'bold',
 		marginHorizontal: 5,
+		flex: 1,
 	},
 	amountText: {
 		flex: 1,
@@ -74,11 +79,19 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		flex: 1,
 		alignItems: 'center',
+		justifyContent: 'center',
 	},
 	fullPriceText: {
 		fontSize: 18,
 		marginHorizontal: 5,
 		width: 80,
+	},
+	flowerAmountText: { fontSize: 20 },
+	editAmountButton: {
+		borderColor: 'black',
+		borderWidth: 0.1,
+		borderRadius: 20,
+		marginHorizontal: 5,
 	},
 });
 
