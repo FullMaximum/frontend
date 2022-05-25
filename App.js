@@ -40,7 +40,11 @@ function MainFlow() {
 				component={MainScreen}
 				options={{ headerShown: false }}
 			/>
-			<Tab.Screen name='Shop' component={ShopScreen} />
+			<Tab.Screen 
+				name='Shop' 
+				component={ShopScreen} 
+				options={{ headerShown: false }}
+			/>
 			<Tab.Screen name='Cart' component={CartScreen} />
 			<Tab.Screen name='About Me' component={ProfileScreen} />
 		</Tab.Navigator>

@@ -1,5 +1,5 @@
-import React, {useState, useEffect } from 'react';
-import {View, StyleSheet, Text, 
+import React, {useState, useEffect, useContext } from 'react';
+import {View, StyleSheet, Text, FlatList,
 	ScrollView, SafeAreaView, TouchableOpacity,
 	StatusBar, Image, ActivityIndicator} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -11,8 +11,16 @@ import SearchBar from "./SearchBar";
 import List from "./List";
 import ShopInfo from "./ShopInfoScreen";
 
+import BigShopCard from '../components/BigShopCard';
+import shopsApi from '../api/shops';
+import { Context as ShopContext } from '../context/ShopContext';
 
 const ShopScreen = ({ navigation }) => {
+	const { state, fetchShops } = useContext(ShopContext);
+
+	useEffect(async () => {
+		fetchShops();
+	}, []);
 	// callFun = () =>
 	// {
 
@@ -49,7 +57,26 @@ const ShopScreen = ({ navigation }) => {
             		data={fakeData}
             		setClicked={setClicked}
           		/> */}
-			<ScrollView style={styles.scrollView}>
+			<View style={styles.themeContainer}>
+				
+				{state.returnObject ? (
+					<FlatList
+						data={state.returnObject}
+						keyExtractor={(item) => item.id}
+						renderItem={({ item }) => {
+							return (
+								<BigShopCard navigation={navigation} data={item} />
+							);
+						}}
+						vertical
+						style={styles.themeScroll}
+						showsHorizontalScrollIndicator={false}
+					/>
+				) : null}
+			</View>
+			{/* <ScrollView style={styles.scrollView}>
+
+			
 				<TouchableOpacity activeOpacity = { .5 } onPress={() => navigation.push('ShopInfo') }>
 					<Image source={require('../../pics/Flowers-shop.png')} style={styles.picStyle} />
 				</TouchableOpacity>
@@ -83,7 +110,7 @@ const ShopScreen = ({ navigation }) => {
          				Flower shop description
         			</Text>
 				</View>
-			</ScrollView>
+			</ScrollView> */}
 		</SafeAreaView>
 	);
 };
@@ -97,7 +124,8 @@ alert("Image Clicked!!!");
 
 const styles = StyleSheet.create({
 	container: {
-	  flex: 1,
+		backgroundColor: '#F8F8F8',
+	 	flex: 1,
 	},
 	scrollView: {
 	  marginHorizontal: 20,
