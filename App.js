@@ -11,6 +11,7 @@ import ShopInfoScreen from './src/screens/ShopInfoScreen';
 import { Provider as ShopProvider } from './src/context/ShopContext';
 import { Provider as CartProvider } from './src/context/CartContext';
 
+
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
