@@ -15,8 +15,6 @@ const FlowerCard = ({ data, onChange, initialAmount = 0 }) => {
 	const [amount, setAmount] = useState(initialAmount);
 
 	useDidUpdateEffect(() => onChange(data.id, amount), [amount]);
-
-const FlowerCard = ({ data }) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.imageContainer}>
