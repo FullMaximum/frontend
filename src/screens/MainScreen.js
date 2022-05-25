@@ -95,10 +95,12 @@ const MainScreen = ({ navigation }) => {
 };
 
 const filteredRating = (data) => {
+	let newData = [...data]
 	return (data.sort((a,b) => b.rating - a.rating).filter(x => x.rating > 4));
 }
 
 const sortedDate = (data) => {
+	let newData = [...data]
 	return (data.sort((a,b) =>  new Date(b.createdAt) - new Date(a.createdAt)));
 }
 
