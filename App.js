@@ -9,6 +9,8 @@ import CartScreen from './src/screens/CartScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import ShopInfoScreen from './src/screens/ShopInfoScreen';
 import { Provider as ShopProvider } from './src/context/ShopContext';
+import { Provider as CartProvider } from './src/context/CartContext';
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -47,11 +49,13 @@ function MainFlow() {
 
 export default function App() {
 	return (
-		<ShopProvider>
-			<NavigationContainer>
-				<HomeFlow />
-			</NavigationContainer>
-		</ShopProvider>
+		<CartProvider>
+			<ShopProvider>
+				<NavigationContainer>
+					<HomeFlow />
+				</NavigationContainer>
+			</ShopProvider>
+		</CartProvider>
 	);
 }
 
