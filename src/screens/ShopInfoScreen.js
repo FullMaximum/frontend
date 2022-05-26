@@ -17,6 +17,23 @@ import { Context as CartContext } from '../context/CartContext';
 
 // import tw from "tailwind-react-native-classnames";
 
+/*
+Object {
+  "flowers": Array [
+    Object {
+      "amount": 2,
+      "category": "Rožės",
+      "id": 5,
+      "imagePath": "",
+      "name": "Raudona rožė",
+      "price": 2.5,
+      "shopId": 2,
+    },
+  ],
+  "shopId": 2,
+}
+*/
+
 import { myShops } from '../../components/ShopList';
 
 const ShopInfoScreen = ({ navigation, route }) => {
