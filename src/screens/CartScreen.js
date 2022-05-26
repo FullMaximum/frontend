@@ -42,10 +42,16 @@ const CartScreen = () => {
 		if (!state && !state.flowers) return;
 
 		const items = state.flowers.reduce(
-			(previousValue, currentValue) => [
-				...previousValue,
-				{ flowerId: currentValue.id, count: currentValue.amount },
-			],
+			(previousValue, currentValue) =>
+				currentValue.amount
+					? [
+							...previousValue,
+							{
+								flowerId: currentValue.id,
+								count: currentValue.amount,
+							},
+					  ]
+					: previousValue,
 			[]
 		);
 
@@ -55,7 +61,7 @@ const CartScreen = () => {
 			status: 0,
 			orderTotal: totalPrice,
 			deliveryAddress: '',
-			rowVersion: null,
+			rowVersion: '',
 			items,
 		};
 
