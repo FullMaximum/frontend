@@ -5,14 +5,17 @@ import {
 	Text,
 	FlatList,
 	TouchableOpacity,
+	ScrollView,
 } from 'react-native';
 import CartFlowerCard from '../components/CartFlowerCard';
 import OrderCard from '../components/OrderCard';
 import { Context as CartContext } from '../context/CartContext';
+import orders from '../api/orders';
 
 const CartScreen = () => {
-	const { state, changeFlower } = useContext(CartContext);
+	const { state, changeFlower, clearState } = useContext(CartContext);
 	const [totalPrice, setTotalPrice] = useState(0);
+	const [userOrders, setUserOrders] = useState();
 
 	const changeFlowers = (id, amount) => {
 		changeFlower({ flower: { id, amount } });
@@ -28,8 +31,40 @@ const CartScreen = () => {
 		}
 	}, [state]);
 
+	useEffect(async () => {
+		let response = await orders.get('/byUserId/1');
+
+		setUserOrders(response.data.success ? response.data : null);
+	}, []);
+
+	const addOrder = async () => {
+		if (!state && !state.flowers) return;
+
+		const items = state.flowers.reduce(
+			(previousValue, currentValue) => [
+				...previousValue,
+				{ flowerId: currentValue.id, count: currentValue.amount },
+			],
+			[]
+		);
+
+		const orderData = {
+			userId: 1,
+			shopId: state.shopId,
+			status: 0,
+			orderTotal: totalPrice,
+			deliveryAddress: '',
+			rowVersion: null,
+			items,
+		};
+
+		const response = await orders.post('/add', orderData);
+
+		clearState();
+	};
+
 	return (
-		<View style={styles.container}>
+		<ScrollView style={styles.container}>
 			{totalPrice === 0 ? null : (
 				<View>
 					<FlatList
@@ -50,13 +85,21 @@ const CartScreen = () => {
 						<Text style={styles.totalText}>
 							total: {totalPrice}€
 						</Text>
-						<TouchableOpacity style={styles.orderNowButton}>
+						<TouchableOpacity
+							style={styles.orderNowButton}
+							onPress={() => addOrder()}
+						>
 							<Text style={styles.orderNowText}>Order Now!</Text>
 						</TouchableOpacity>
 					</View>
 				</View>
 			)}
-		</View>
+			{userOrders
+				? userOrders.returnObject.map((item) => (
+						<OrderCard key={item.id} data={item} />
+				  ))
+				: null}
+		</ScrollView>
 	);
 };
 
