@@ -3,37 +3,59 @@ import {
 	View,
 	StyleSheet,
 	Text,
-	ScrollView,
+	FlatList,
 	TouchableOpacity,
 } from 'react-native';
-import FlowerCard from '../components/FlowerCard';
-import flowersApi from '../api/flowers';
 import CartFlowerCard from '../components/CartFlowerCard';
-import { Context as FlowerContext } from '../context/ShopContext';
+import OrderCard from '../components/OrderCard';
+import { Context as CartContext } from '../context/CartContext';
 
 const CartScreen = () => {
-	const [flowers, setFlowers] = useState(null);
+	const { state, changeFlower } = useContext(CartContext);
+	const [totalPrice, setTotalPrice] = useState(0);
 
-	useEffect(async () => {
-		let response = await flowersApi.get('/getallflowers');
+	const changeFlowers = (id, amount) => {
+		changeFlower({ flower: { id, amount } });
+	};
 
-		setFlowers(response.data.success ? response.data.returnObject : null);
-	}, []);
+	useEffect(() => {
+		if (state && state.flowers) {
+			const sum = state.flowers.reduce(
+				(partialSum, a) => partialSum + a.amount * a.price,
+				0
+			);
+			setTotalPrice(sum);
+		}
+	}, [state]);
 
 	return (
 		<View style={styles.container}>
-			<ScrollView style={styles.cartFlowersContainer}>
-				<CartFlowerCard />
-				<CartFlowerCard />
-				<CartFlowerCard />
-			</ScrollView>
-			<View style={styles.cartOverviewContainer}>
-				<Text style={styles.totalText}>total: 95€</Text>
-				<TouchableOpacity style={styles.orderNowButton}>
-					<Text style={styles.orderNowText}>Order Now!</Text>
-				</TouchableOpacity>
-			</View>
-			<View></View>
+			{totalPrice === 0 ? null : (
+				<View>
+					<FlatList
+						style={styles.cartFlowersContainer}
+						data={state.flowers}
+						keyExtractor={(item) => item.id}
+						renderItem={({ item }) => {
+							return item.amount === 0 ? null : (
+								<CartFlowerCard
+									data={item}
+									onChange={changeFlowers}
+								/>
+							);
+						}}
+						showsVerticalScrollIndicator={false}
+					/>
+					<View style={styles.cartOverviewContainer}>
+						<Text style={styles.totalText}>
+							total: {totalPrice}€
+						</Text>
+						<TouchableOpacity style={styles.orderNowButton}>
+							<Text style={styles.orderNowText}>Order Now!</Text>
+						</TouchableOpacity>
+					</View>
+				</View>
+			)}
 		</View>
 	);
 };
@@ -41,7 +63,7 @@ const CartScreen = () => {
 const styles = StyleSheet.create({
 	container: {},
 	cartFlowersContainer: {
-		height: 330,
+		maxHeight: 330,
 	},
 	cartOverviewContainer: {},
 	totalText: {
