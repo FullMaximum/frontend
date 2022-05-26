@@ -24,7 +24,8 @@ const CartScreen = () => {
 	useEffect(() => {
 		if (state && state.flowers) {
 			const sum = state.flowers.reduce(
-				(partialSum, a) => partialSum + a.amount * a.price,
+				(partialSum, a) =>
+					partialSum + (a.amount ? a.amount * a.price : 0),
 				0
 			);
 			setTotalPrice(sum);
@@ -72,7 +73,7 @@ const CartScreen = () => {
 						data={state.flowers}
 						keyExtractor={(item) => item.id}
 						renderItem={({ item }) => {
-							return item.amount === 0 ? null : (
+							return !item.amount && item.amount !== 0 ? null : (
 								<CartFlowerCard
 									data={item}
 									onChange={changeFlowers}
