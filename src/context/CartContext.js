@@ -17,6 +17,8 @@ const cardReducer = (state, action) => {
 				amount: action.payload.amount,
 			};
 			return newState;
+		case 'clearState':
+			return {};
 		default:
 			return state;
 	}
@@ -36,11 +38,18 @@ const changeFlower = (dispatch) => {
 	};
 };
 
+const clearState = (dispatch) => {
+	return () => {
+		dispatch({ type: 'clear_state' });
+	};
+};
+
 export const { Provider, Context } = createDataContext(
 	cardReducer,
 	{
 		setShop,
 		changeFlower,
+		clearState,
 	},
 	[]
 );
