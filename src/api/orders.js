@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export default axios.create({
-	baseURL: 'https://fullmaximum.azurewebsites.net/api/shop',
+	baseURL: 'https://fullmaximum.azurewebsites.net/api/Orders',
 });
