@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { EvilIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
-const CartFlowerCard = ({ data }) => {
+const CartFlowerCard = ({ data, onChange }) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.infoContainer}>
@@ -14,11 +14,21 @@ const CartFlowerCard = ({ data }) => {
 					</Text>
 				</View>
 				<View style={styles.amountContainer}>
-					<TouchableOpacity style={styles.editAmountButton}>
+					<TouchableOpacity
+						style={styles.editAmountButton}
+						onPress={() =>
+							data.amount === 0
+								? null
+								: onChange(data.id, data.amount - 1)
+						}
+					>
 						<AntDesign name='minus' size={35} color='red' />
 					</TouchableOpacity>
 					<Text style={styles.flowerAmountText}>{data.amount}</Text>
-					<TouchableOpacity style={styles.editAmountButton}>
+					<TouchableOpacity
+						style={styles.editAmountButton}
+						onPress={() => onChange(data.id, data.amount + 1)}
+					>
 						<AntDesign name='plus' size={35} color='green' />
 					</TouchableOpacity>
 				</View>
@@ -29,7 +39,10 @@ const CartFlowerCard = ({ data }) => {
 					uri: data.imagePath,
 				}}
 			/>
-			<TouchableOpacity style={styles.deleteButton}>
+			<TouchableOpacity
+				style={styles.deleteButton}
+				onPress={() => onChange(data.id, 0)}
+			>
 				<EvilIcons
 					style={{ marginLeft: -3 }}
 					name='trash'
