@@ -15,25 +15,6 @@ import FlowerCard from '../components/FlowerCard';
 import flowersApi from '../api/flowers';
 import { Context as CartContext } from '../context/CartContext';
 
-// import tw from "tailwind-react-native-classnames";
-
-/*
-Object {
-  "flowers": Array [
-    Object {
-      "amount": 2,
-      "category": "Rožės",
-      "id": 5,
-      "imagePath": "",
-      "name": "Raudona rožė",
-      "price": 2.5,
-      "shopId": 2,
-    },
-  ],
-  "shopId": 2,
-}
-*/
-
 import { myShops } from '../../components/ShopList';
 
 const ShopInfoScreen = ({ navigation, route }) => {
@@ -63,7 +44,7 @@ const ShopInfoScreen = ({ navigation, route }) => {
 	const getInitialAmount = (id) => {
 		if (state.shopId !== data.id) return 0;
 
-		if (state || state.flowers) {
+		if (state && state.flowers) {
 			let initAmount = state.flowers
 				? state.flowers.find((el) => el.id === id).amount
 				: 0;
