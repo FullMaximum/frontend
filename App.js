@@ -58,7 +58,7 @@ function MainFlow() {
 				component={ShopScreen} 
 				options={{ headerShown: false,
 					tabBarIcon: ({  }) => (
-						<Image source={require('./assets/bottomTabAssets/Logo.png')}  />
+						<Image source={require('./assets/bottomTabAssets/Logo.png')} style={styles.shopLogo} />
 					) 
 				}}
 
@@ -107,7 +107,11 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	logo: {
-		width: 38,
-		height: 38
+		width: 28,
+		height: 28
+	},
+	shopLogo: {
+		width: 40,
+		height: 28
 	}
 });

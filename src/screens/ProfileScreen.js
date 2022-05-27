@@ -13,9 +13,13 @@ import ShopInfo from "./ShopInfoScreen";
 
 import BigShopCard from '../components/BigShopCard';
 import shopsApi from '../api/shops';
-import { Context as ShopContext } from '../context/ShopContext';
+import { Context as AuthContext } from '../context/AuthContext';
 
 const ProfileScreen = () => {
+
+	const { state, login } = useContext(AuthContext);
+
+
 	return (
 		<SafeAreaView style={styles.container}>
 			
@@ -23,7 +27,7 @@ const ProfileScreen = () => {
 				<Image source={require('../../assets/ph_finn-the-human.png')} style={styles.picStyle} />
 				
 			</View>
-			<Text style={styles.textName}>HI NAME!</Text>
+			<Text style={styles.textName}>HI {state.username}!</Text>
 			<View style={styles.view}>
 				<Text style={styles.text}>Settings</Text>
 				<Image source={require('../../assets/cil_settings.png')} style={styles.iconStyle}  />
