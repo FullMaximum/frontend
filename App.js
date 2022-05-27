@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -40,15 +40,47 @@ function HomeFlow() {
 
 function MainFlow() {
 	return (
-		<Tab.Navigator>
+		<Tab.Navigator
+			screenOptions={{tabBarShowLabel: false}}
+		>
 			<Tab.Screen
 				name='Home'
 				component={MainScreen}
-				options={{ headerShown: false }}
+				options={{ 
+					headerShown: false,
+					tabBarIcon: ({  }) => (
+						<Image source={require('./assets/bottomTabAssets/Home.png')} style={styles.logo} />
+					)
+				}}
 			/>
-			<Tab.Screen name='Shop' component={ShopScreen} />
-			<Tab.Screen name='Cart' component={CartScreen} />
-			<Tab.Screen name='About Me' component={ProfileScreen} />
+			<Tab.Screen 
+				name='Shop' 
+				component={ShopScreen} 
+				options={{ headerShown: false,
+					tabBarIcon: ({  }) => (
+						<Image source={require('./assets/bottomTabAssets/Logo.png')}  />
+					) 
+				}}
+
+			/>
+			<Tab.Screen 
+				name='Cart' 
+				component={CartScreen}
+				options={{ headerShown: false,
+					tabBarIcon: ({  }) => (
+						<Image source={require('./assets/bottomTabAssets/ShoppingCart.png')} style={styles.logo}  />
+					) 
+				}}
+				 />
+			<Tab.Screen 
+				name='About Me' 
+				component={ProfileScreen}
+				options={{ headerShown: false,
+					tabBarIcon: ({  }) => (
+						<Image source={require('./assets/bottomTabAssets/Profile.png')} style={styles.logo} />
+					) 
+				}}
+				/>
 		</Tab.Navigator>
 	);
 }
@@ -74,4 +106,8 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
+	logo: {
+		width: 38,
+		height: 38
+	}
 });
