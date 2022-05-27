@@ -8,9 +8,10 @@ import ShopScreen from './src/screens/ShopScreen';
 import CartScreen from './src/screens/CartScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import ShopInfoScreen from './src/screens/ShopInfoScreen';
+import LoginScreen from './src/screens/LoginScreen';
 import { Provider as ShopProvider } from './src/context/ShopContext';
 import { Provider as CartProvider } from './src/context/CartContext';
-
+import { Provider as AuthProvider } from './src/context/AuthContext';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -18,6 +19,11 @@ const Tab = createBottomTabNavigator();
 function HomeFlow() {
 	return (
 		<Stack.Navigator>
+			<Stack.Screen
+				name='Login'
+				component={LoginScreen}
+				options={{ headerShown: false }}
+			/>
 			<Stack.Screen
 				name='MainFlow'
 				component={MainFlow}
@@ -49,13 +55,15 @@ function MainFlow() {
 
 export default function App() {
 	return (
-		<CartProvider>
-			<ShopProvider>
-				<NavigationContainer>
-					<HomeFlow />
-				</NavigationContainer>
-			</ShopProvider>
-		</CartProvider>
+		<AuthProvider>
+			<CartProvider>
+				<ShopProvider>
+					<NavigationContainer>
+						<HomeFlow />
+					</NavigationContainer>
+				</ShopProvider>
+			</CartProvider>
+		</AuthProvider>
 	);
 }
 
