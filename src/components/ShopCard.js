@@ -23,7 +23,7 @@ const ShopCard = ({ navigation, data }) => {
 					name='star'
 					size={20}
 					style={{ alignSelf: 'center', marginHorizontal: 2 }}
-					color='black'
+					color='#588961'
 				/>
 				<Text style={styles.shopRatingText}>{data.rating}</Text>
 			</View>
@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
 		width: 180,
 		marginHorizontal: 5,
 		borderRadius: 10,
+		backgroundColor: '#E9F4EE',
 	},
 	image: {
 		width: 178,
@@ -48,6 +49,7 @@ const styles = StyleSheet.create({
 		marginHorizontal: 10,
 		fontSize: 18,
 		fontWeight: 'bold',
+		color: '#588961',
 	},
 	additionalInfoContainer: {
 		flexDirection: 'row',
@@ -57,9 +59,11 @@ const styles = StyleSheet.create({
 	deliveryPriceText: {
 		fontSize: 16,
 		flex: 1,
+		color: '#588961',
 	},
 	shopRatingText: {
 		fontSize: 16,
+		color: '#588961',
 	},
 });
 

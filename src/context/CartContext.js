@@ -17,7 +17,7 @@ const cardReducer = (state, action) => {
 				amount: action.payload.amount,
 			};
 			return newState;
-		case 'clearState':
+		case 'clear_state':
 			return {};
 		default:
 			return state;
