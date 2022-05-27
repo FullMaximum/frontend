@@ -28,6 +28,7 @@ const CartScreen = () => {
 					partialSum + (a.amount ? a.amount * a.price : 0),
 				0
 			);
+			console.log(sum);
 			setTotalPrice(sum);
 		}
 	}, [state]);
@@ -56,23 +57,32 @@ const CartScreen = () => {
 		);
 
 		const orderData = {
-			userId: 1,
+			deliveryAddress: 'Jes',
+			orderTotal: totalPrice,
+			rowVersion: '',
 			shopId: state.shopId,
 			status: 0,
-			orderTotal: totalPrice,
-			deliveryAddress: '',
-			rowVersion: '',
+			userId: 1,
+			createdAt: null,
+			updatedAt: null,
 			items,
 		};
 
 		const response = await orders.post('/add', orderData);
 
 		clearState();
+		updateOrders();
+	};
+
+	const updateOrders = async () => {
+		let response = await orders.get('/byUserId/1');
+
+		setUserOrders(response.data.success ? response.data : null);
 	};
 
 	return (
 		<ScrollView style={styles.container}>
-			{totalPrice === 0 ? null : (
+			{!state.flowers ? null : (
 				<View>
 					<FlatList
 						style={styles.cartFlowersContainer}
@@ -111,7 +121,9 @@ const CartScreen = () => {
 };
 
 const styles = StyleSheet.create({
-	container: {},
+	container: {
+		marginTop: 50,
+	},
 	cartFlowersContainer: {
 		maxHeight: 330,
 	},

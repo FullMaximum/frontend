@@ -27,45 +27,48 @@ const ShopScreen = ({ navigation }) => {
 	// alert("Image Clicked!!!");
 
 	// }
-	const [searchPhrase, setSearchPhrase] = useState("");
+	const [searchPhrase, setSearchPhrase] = useState('');
 	const [clicked, setClicked] = useState(false);
 	const [fakeData, setFakeData] = useState();
 
 	useEffect(() => {
 		const getData = async () => {
-		  const apiResponse = await fetch(
-			"https://my-json-server.typicode.com/kevintomas1995/logRocket_searchBar/languages"
-		  );
-		  const data = await apiResponse.json();
-		  setFakeData(data);
+			const apiResponse = await fetch(
+				'https://my-json-server.typicode.com/kevintomas1995/logRocket_searchBar/languages'
+			);
+			const data = await apiResponse.json();
+			setFakeData(data);
 		};
 		getData();
-	  }, []);
+	}, []);
 
-
-	return (
-		<SafeAreaView style={styles.container}>
-			{!clicked && <Text style={styles.title}></Text>}
-      		<SearchBar
+	/* <SearchBar
         		searchPhrase={searchPhrase}
         		setSearchPhrase={setSearchPhrase}
         		clicked={clicked}
         		setClicked={setClicked}
-      		/>
-          		{/* <List
+      		/> */
+
+	return (
+		<SafeAreaView style={styles.container}>
+			{!clicked && <Text style={styles.title}></Text>}
+
+			{/* <List
             		searchPhrase={searchPhrase}
             		data={fakeData}
             		setClicked={setClicked}
           		/> */}
 			<View style={styles.themeContainer}>
-				
 				{state.returnObject ? (
 					<FlatList
 						data={state.returnObject}
 						keyExtractor={(item) => item.id}
 						renderItem={({ item }) => {
 							return (
-								<BigShopCard navigation={navigation} data={item} />
+								<BigShopCard
+									navigation={navigation}
+									data={item}
+								/>
 							);
 						}}
 						vertical
@@ -114,24 +117,22 @@ const ShopScreen = ({ navigation }) => {
 		</SafeAreaView>
 	);
 };
-const callFun = () =>
-{
-
-alert("Image Clicked!!!");
-
-}
+const callFun = () => {
+	alert('Image Clicked!!!');
+};
 // const styles = StyleSheet.create();
 
 const styles = StyleSheet.create({
 	container: {
 		backgroundColor: '#F8F8F8',
-	 	flex: 1,
+		flex: 1,
+		paddingTop: 50,
 	},
 	scrollView: {
-	  marginHorizontal: 20,
+		marginHorizontal: 20,
 	},
 	picStyle: {
-		width: 350, 
+		width: 350,
 		height: 150,
 		marginLeft: 5,
 		borderRadius: 10,
@@ -148,10 +149,10 @@ const styles = StyleSheet.create({
 		borderColor: '#fff',
 	},
 	text: {
-		color: 'mediumseagreen', 
+		color: 'mediumseagreen',
 		opacity: 1,
 		fontSize: 22,
 	},
-  });
+});
 
 export default ShopScreen;
